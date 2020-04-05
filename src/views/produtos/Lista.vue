@@ -5,13 +5,11 @@
       title="Produtos"
       row-key="id_produto"
       :service="service"
+      :params="filtros"
       :columns="columns"
       selection="single"
       :selected.sync="selected"
     />
-    <div class="q-mt-md">
-      Selected: {{ JSON.stringify(selected) }}
-    </div>
   </div>
 </template>
 
@@ -33,6 +31,8 @@ export default {
     return {
       selected: [],
 
+      filtros: { expand: true },
+
       columns: [
         {
           name: 'id_produto',
@@ -52,14 +52,15 @@ export default {
           sortable: true
         },
 
-        // {
-        //   name: 'categoria',
-        //   required: true,
-        //   label: 'Categoria',
-        //   align: 'left',
-        //   field: (row) => row.categoria.nome_categoria,
-        //   sortable: true
-        // },
+        {
+          name: 'categoria',
+          required: true,
+          label: 'Categoria',
+          align: 'left',
+          field: 'categoria',
+          format: (value) => value.nome_categoria,
+          sortable: true
+        },
 
         {
           name: 'valor_produto',

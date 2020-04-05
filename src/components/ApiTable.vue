@@ -1,19 +1,52 @@
 <template>
-  <div>
-    <q-table
-      :title="title"
-      :data="data"
-      :columns="columns"
-      :row-key="rowKey"
-      :loading="loading"
-      :selection="selection"
-      binary-state-sort
-      :selected.sync="mySelected"
-    />
-    <div class="q-mt-md">
-      Selected: {{ JSON.stringify(mySelected) }}
-    </div>
-  </div>
+  <q-table
+    :title="title"
+    :data="data"
+    :columns="columns"
+    :row-key="rowKey"
+    :loading="loading"
+    :selection="selection"
+    binary-state-sort
+    :selected.sync="mySelected"
+    wrap-cells
+  >
+    <template v-slot:top>
+      <p class="q-table__title">
+        {{ title }}
+      </p>
+
+      <q-space />
+
+      <q-btn-group>
+        <q-btn
+          id="btnAdd"
+          color="secondary"
+          icon="add"
+        />
+
+        <q-btn
+          id="btnEdit"
+          color="secondary"
+          icon="edit"
+          :disable="btnDisable"
+        />
+
+        <q-btn
+          id="btnDelete"
+          color="secondary"
+          icon="delete"
+          :disable="btnDisable"
+        />
+
+        <q-btn
+          id="btnRefresh"
+          color="secondary"
+          icon="refresh"
+          @click="refresh"
+        />
+      </q-btn-group>
+    </template>
+  </q-table>
 </template>
 
 <script>
@@ -24,6 +57,11 @@ export default {
     service: {
       type: Object,
       required: true
+    },
+
+    params: {
+      type: Object,
+      default: () => ({})
     },
 
     columns: {
@@ -60,6 +98,12 @@ export default {
     }
   },
 
+  computed: {
+    btnDisable() {
+      return !this.mySelected
+    }
+  },
+
   watch: {
     mySelected: function(newValue, oldValue) {
       this.$emit('update:selected', newValue)
@@ -76,16 +120,16 @@ export default {
         this.data = []
         this.loading = true
         try {
-          const { data } = await this.service.get()
+          const { data } = await this.service.get(this.params)
           this.data = data.data
         } catch (e) {
+          console.log(e.response)
           this.$q.notify({
             type: 'negative',
             message: 'Não foi possível buscar os dados!',
             progress: true,
             group: true
           })
-          console.log(e.response)
         } finally {
           this.loading = false
         }

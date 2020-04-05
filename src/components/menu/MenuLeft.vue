@@ -1,6 +1,6 @@
 <template>
   <q-drawer
-    v-model="open"
+    v-model="opened"
     content-class="bg-grey-3"
     show-if-above
     elevated
@@ -31,6 +31,22 @@ export default {
     open: {
       type: Boolean,
       required: true
+    }
+  },
+
+  data() {
+    return {
+      opened: true
+    }
+  },
+
+  watch: {
+    open: function(newValue) {
+      this.opened = newValue
+    },
+
+    opened: function(newValue) {
+      this.$emit('update:open', newValue)
     }
   }
 }
