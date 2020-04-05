@@ -1,0 +1,6 @@
+/dist
+**/*.styl
+**/*.ico
+**/*.png
+**/*.jpg
+**/*.scss
