@@ -8,7 +8,8 @@ import '@quasar/extras/material-icons/material-icons.css'
 import {
   Quasar,
   Notify,
-  Dialog
+  Dialog,
+  Loading
 } from 'quasar'
 
 Vue.use(Quasar, {
@@ -17,7 +18,8 @@ Vue.use(Quasar, {
   directives: { /* not needed if importStrategy is not 'manual' */ },
   plugins: {
     Notify,
-    Dialog
+    Dialog,
+    Loading
   },
   lang: lang
 })
