@@ -137,12 +137,12 @@ export default {
     },
 
     $_onAddClick() {
-      this.$emit('add')
+      this.$emit('addClick')
     },
 
     $_onEditClick() {
       if (this.$_validaSelecao()) {
-        this.$emit('edit', this.mySelected[0])
+        this.$emit('editClick', this.mySelected[0])
       }
     },
 
