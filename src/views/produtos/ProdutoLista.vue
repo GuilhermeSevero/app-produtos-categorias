@@ -7,6 +7,8 @@
     :params="filtros"
     :columns="columns"
     selection="single"
+    @addClick="$_onAddClick"
+    @editClick="$_onEditClick"
   />
 </template>
 
@@ -85,6 +87,13 @@ export default {
   },
 
   methods: {
+    $_onAddClick(produto) {
+      this.$router.push('/produtos/0')
+    },
+
+    $_onEditClick(produto) {
+      this.$router.push(`/produtos/${produto.id_produto}`)
+    }
   }
 }
 </script>
