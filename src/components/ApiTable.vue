@@ -22,20 +22,21 @@
           id="btnAdd"
           color="secondary"
           icon="add"
+          @click="$_onAddClick"
         />
 
         <q-btn
           id="btnEdit"
           color="secondary"
           icon="edit"
-          :disable="btnDisable"
+          @click="$_onEditClick"
         />
 
         <q-btn
           id="btnDelete"
           color="secondary"
           icon="delete"
-          :disable="btnDisable"
+          @click="onDeleteClick"
         />
 
         <q-btn
@@ -99,9 +100,6 @@ export default {
   },
 
   computed: {
-    btnDisable() {
-      return !this.mySelected
-    }
   },
 
   watch: {
@@ -115,25 +113,84 @@ export default {
   },
 
   methods: {
-    async refresh() {
+    refresh() {
       if (this.service) {
-        this.data = []
-        this.loading = true
-        try {
-          const { data } = await this.service.get(this.params)
-          this.data = data.data
-        } catch (e) {
-          console.log(e.response)
-          this.$q.notify({
-            type: 'negative',
-            message: 'Não foi possível buscar os dados!',
-            progress: true,
-            group: true
-          })
-        } finally {
-          this.loading = false
-        }
+        this.$_buscarDados()
       }
+    },
+
+    async $_buscarDados() {
+      this.data = []
+      this.loading = true
+      try {
+        const { data } = await this.service.get(this.params)
+        this.data = data.data
+      } catch (error) {
+        this.$notify.error({
+          title: 'Atenção!',
+          message: 'Não foi possível buscar os dados!',
+          error
+        })
+      } finally {
+        this.loading = false
+      }
+    },
+
+    $_onAddClick() {
+      this.$emit('add')
+    },
+
+    $_onEditClick() {
+      if (this.$_validaSelecao()) {
+        this.$emit('edit', this.mySelected[0])
+      }
+    },
+
+    async $_doDelete(id) {
+      this.loading = true
+      try {
+        await this.service.delete(id)
+
+        this.$set(this, 'data', this.data.filter(el => el[this.rowKey] !== id))
+
+        this.$notify.success({
+          message: 'Registro apagado com sucesso!',
+          duration: 5000
+        })
+      } catch (error) {
+        this.$notify.error({
+          title: 'Atenção!',
+          message: 'Não foi possível excluir o registro!',
+          error
+        })
+      } finally {
+        this.loading = false
+      }
+    },
+
+    onDeleteClick() {
+      if (this.$_validaSelecao()) {
+        this.$q.dialog({
+          title: 'Confirmar',
+          message: 'Você gostaria de Excluir o registro selecionado?',
+          cancel: true,
+          persistent: true
+        }).onOk(() => {
+          this.$_doDelete(this.mySelected[0][this.rowKey])
+        })
+      }
+    },
+
+    $_validaSelecao() {
+      if (this.mySelected.length === 1) {
+        return true
+      }
+      this.$notify.warning({
+        title: 'Validação!',
+        message: 'Necessário selecionar um registro!',
+        duration: 5000
+      })
+      return false
     }
   }
 }
