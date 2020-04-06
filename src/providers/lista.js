@@ -43,7 +43,7 @@ export default {
 
         this.$notify.success({
           message: 'Registro apagado com sucesso!',
-          duration: 5000
+          duration: 3000
         })
       } catch (error) {
         this.$notify.error({

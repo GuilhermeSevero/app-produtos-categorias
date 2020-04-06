@@ -159,7 +159,7 @@ export default {
       this.$notify.warning({
         title: 'Validação!',
         message: 'Necessário selecionar um registro!',
-        duration: 5000
+        duration: 3000
       })
       return false
     }

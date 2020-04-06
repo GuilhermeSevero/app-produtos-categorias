@@ -55,6 +55,11 @@ export default {
         } else {
           await this.service.post(this.editable)
         }
+        this.$notify.success({
+          message: 'Registro salvo com sucesso!',
+          duration: 3000
+        })
+
         this.$emit('saved')
       } catch (error) {
         this.$notify.error({
