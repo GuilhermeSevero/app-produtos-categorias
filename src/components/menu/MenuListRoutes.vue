@@ -3,19 +3,19 @@
     <menu-item-route
       label="Home"
       to="/home"
-      icon="person_pin"
+      icon="storefront"
     />
 
     <menu-item-route
       label="Categorias"
       to="/categorias"
-      icon="person_pin"
+      icon="poll"
     />
 
     <menu-item-route
       label="Produtos"
       to="/produtos"
-      icon="person_pin"
+      icon="shopping_basket"
     />
   </q-list>
 </template>
