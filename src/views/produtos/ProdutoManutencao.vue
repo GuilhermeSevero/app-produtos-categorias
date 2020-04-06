@@ -1,15 +1,15 @@
 <template>
   <div class="q-pa-md row justify-center">
-    <form-provider
-      ref="formProvider"
+    <manutencao-provider
+      ref="manutencaoProvider"
       :service="service"
       :id="idCategoria"
       @saved="$_redirect"
     >
       <template v-slot="{ editable, loading }">
         <submit-form
-          @submit="$refs.formProvider.insertOrUpdate()"
-          @reset="$refs.formProvider.reset()"
+          @submit="$refs.manutencaoProvider.insertOrUpdate()"
+          @reset="$refs.manutencaoProvider.reset()"
         >
           <q-input
             v-model="editable.id_produto"
@@ -73,7 +73,7 @@
           </q-input>
         </submit-form>
       </template>
-    </form-provider>
+    </manutencao-provider>
   </div>
 </template>
 
@@ -83,14 +83,14 @@ import produtoService from '../../services/produto'
 import SubmitForm from '../../components/SubmitForm'
 import SelectCategoria from '../../components/SelectCategoria'
 
-import FormProvider from '../../providers/form'
+import ManutencaoProvider from '../../providers/manutencao'
 
 export default {
   name: 'PgManutencaoProduto',
 
   components: {
     SubmitForm,
-    FormProvider,
+    ManutencaoProvider,
     SelectCategoria
   },
 
@@ -111,7 +111,7 @@ export default {
 
   mounted() {
     if (this.idCategoria) {
-      this.$refs.formProvider.load()
+      this.$refs.manutencaoProvider.load()
     }
   },
 
