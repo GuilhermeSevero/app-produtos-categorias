@@ -1,58 +1,70 @@
 <template>
-  <q-table
-    :title="title"
-    :data="data"
-    :columns="columns"
-    :row-key="rowKey"
-    :loading="loading"
-    :selection="selection"
-    binary-state-sort
-    :selected.sync="mySelected"
-    wrap-cells
+  <provider
+    ref="tableProvider"
+    :service="service"
+    :params="params"
   >
-    <template v-slot:top>
-      <p class="q-table__title">
-        {{ title }}
-      </p>
+    <template v-slot="{ data, loading }">
+      <q-table
+        :title="title"
+        :data="data"
+        :columns="columns"
+        :row-key="rowKey"
+        :loading="loading"
+        :selection="selection"
+        binary-state-sort
+        :selected.sync="mySelected"
+        wrap-cells
+      >
+        <template v-slot:top>
+          <p class="q-table__title">
+            {{ title }}
+          </p>
 
-      <q-space />
+          <q-space />
 
-      <q-btn-group>
-        <q-btn
-          id="btnAdd"
-          color="secondary"
-          icon="add"
-          @click="$_onAddClick"
-        />
+          <q-btn-group>
+            <q-btn
+              id="btnAdd"
+              color="secondary"
+              icon="add"
+              @click="$_onAddClick"
+            />
 
-        <q-btn
-          id="btnEdit"
-          color="secondary"
-          icon="edit"
-          @click="$_onEditClick"
-        />
+            <q-btn
+              id="btnEdit"
+              color="secondary"
+              icon="edit"
+              @click="$_onEditClick"
+            />
 
-        <q-btn
-          id="btnDelete"
-          color="secondary"
-          icon="delete"
-          @click="onDeleteClick"
-        />
+            <q-btn
+              id="btnDelete"
+              color="secondary"
+              icon="delete"
+              @click="onDeleteClick"
+            />
 
-        <q-btn
-          id="btnRefresh"
-          color="secondary"
-          icon="refresh"
-          @click="refresh"
-        />
-      </q-btn-group>
+            <q-btn
+              id="btnRefresh"
+              color="secondary"
+              icon="refresh"
+              @click="refresh"
+            />
+          </q-btn-group>
+        </template>
+      </q-table>
     </template>
-  </q-table>
+  </provider>
 </template>
 
 <script>
+import provider from '../providers/table'
+
 export default {
   name: 'ApiTable',
+
+  components: { provider },
 
   props: {
     service: {
@@ -93,8 +105,6 @@ export default {
 
   data() {
     return {
-      data: [],
-      loading: false,
       mySelected: []
     }
   },
@@ -115,24 +125,7 @@ export default {
   methods: {
     refresh() {
       if (this.service) {
-        this.$_buscarDados()
-      }
-    },
-
-    async $_buscarDados() {
-      this.data = []
-      this.loading = true
-      try {
-        const { data } = await this.service.get(this.params)
-        this.data = data.data
-      } catch (error) {
-        this.$notify.error({
-          title: 'Atenção!',
-          message: 'Não foi possível buscar os dados!',
-          error
-        })
-      } finally {
-        this.loading = false
+        this.$refs.tableProvider.load()
       }
     },
 
@@ -146,28 +139,6 @@ export default {
       }
     },
 
-    async $_doDelete(id) {
-      this.loading = true
-      try {
-        await this.service.delete(id)
-
-        this.$set(this, 'data', this.data.filter(el => el[this.rowKey] !== id))
-
-        this.$notify.success({
-          message: 'Registro apagado com sucesso!',
-          duration: 5000
-        })
-      } catch (error) {
-        this.$notify.error({
-          title: 'Atenção!',
-          message: 'Não foi possível excluir o registro!',
-          error
-        })
-      } finally {
-        this.loading = false
-      }
-    },
-
     onDeleteClick() {
       if (this.$_validaSelecao()) {
         this.$q.dialog({
@@ -176,7 +147,7 @@ export default {
           cancel: true,
           persistent: true
         }).onOk(() => {
-          this.$_doDelete(this.mySelected[0][this.rowKey])
+          this.$refs.tableProvider.delete(this.mySelected[0][this.rowKey])
         })
       }
     },
