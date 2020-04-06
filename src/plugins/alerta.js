@@ -1,7 +1,8 @@
+import { Notify } from 'quasar'
 
 class ClassAlertas {
-  error({ title = 'Erro!', message = 'Ocorreu um erro!', apiError = {}, duration = 0 }){
-    this.$exibeErroConsole(apiError)
+  error({ title = 'Erro!', message = 'Ocorreu um erro!', error = {}, duration = 0 }){
+    this.$exibeErroConsole(error)
     this.$mostraAlerta('negative', title, message, duration)
   }
 
@@ -33,17 +34,17 @@ class ClassAlertas {
   }
 
   $mostraAlerta(type, title, message, duration){
-    this.$q.notify({
+    Notify.create({
       progress: true,
       type: type,
-      message: ` <div>
-                            <b>${title}</b>
-                        </div>
-                        <hr color="white">
-                        <div>${message}</div>`,
+      message: `<div>
+                    <b>${title}</b>
+                </div>
+                <hr color="white">
+                <div>${message}</div>`,
       textColor: 'white',
-      multiLine: true,
       position: 'top-right',
+      multiLine: true,
       html: true,
       timeout: duration,
       actions: duration <= 0 ? [{ icon: 'close', color: 'white' }] : []
