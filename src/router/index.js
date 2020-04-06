@@ -23,7 +23,7 @@ const routes = [
       {
         id: 'pgHomePage',
         path: '/categorias',
-        component: () => import('../views/categorias/Lista'),
+        component: () => import('../views/categorias/CategoriaLista'),
         meta: {
           titulo: 'Lista de Categorias',
           noBack: false
@@ -33,7 +33,7 @@ const routes = [
       {
         id: 'pgHomePage',
         path: '/produtos',
-        component: () => import('../views/produtos/Lista'),
+        component: () => import('../views/produtos/ProdutoLista'),
         meta: {
           titulo: 'Lista de Produtos',
           noBack: false
