@@ -6,6 +6,9 @@ import router from './router'
 import store from './store'
 import './plugins/quasar'
 
+import { Alerta } from './plugins/alerta'
+Vue.use(Alerta)
+
 Vue.config.productionTip = false
 
 new Vue({
