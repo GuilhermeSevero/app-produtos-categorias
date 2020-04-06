@@ -26,6 +26,7 @@
           <q-btn-group>
             <q-btn
               id="btnAdd"
+              label="Novo"
               color="secondary"
               icon="add"
               @click="$_onAddClick"
@@ -33,6 +34,7 @@
 
             <q-btn
               id="btnEdit"
+              label="Editar"
               color="secondary"
               icon="edit"
               @click="$_onEditClick"
@@ -40,6 +42,7 @@
 
             <q-btn
               id="btnDelete"
+              label="Apagar"
               color="secondary"
               icon="delete"
               @click="onDeleteClick"
@@ -47,6 +50,7 @@
 
             <q-btn
               id="btnRefresh"
+              label="Atualizar"
               color="secondary"
               icon="refresh"
               @click="refresh"
