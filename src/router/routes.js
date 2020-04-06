@@ -30,7 +30,7 @@ export default [
         name: 'manutencaoCategoria',
         component: () => import('../views/categorias/CategoriaManutencao'),
         meta: {
-          titulo: 'Manutenção de Categorias'
+          titulo: 'Manutenção da Categoria'
         }
       },
 
@@ -41,6 +41,16 @@ export default [
         component: () => import('../views/produtos/ProdutoLista'),
         meta: {
           titulo: 'Lista de Produtos'
+        }
+      },
+
+      {
+        id: 'pgHomePage',
+        path: '/produtos/:id',
+        name: 'manutencaoProdutos',
+        component: () => import('../views/produtos/ProdutoManutencao'),
+        meta: {
+          titulo: 'Manutenção do Produto'
         }
       }
     ]
