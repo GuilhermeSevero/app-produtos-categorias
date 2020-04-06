@@ -45,22 +45,22 @@ $ npm run build
 
 # Detalhes do APP
 
-## Páginas:
-
-- **Layout**
-  - *Header*:
+## Layout
+  - **Header**:
     - Botão para Abrir ou fechar o menu lateral esquerdo
     - Título da página atual
     - Logo do Projeto, no canto direito
-  - *Menu Esquerdo*:
-    - Header base para a implementação dos dados do usuário Logado (Login não foi desenvolvido, visto que não fazia parte do escopo do projeto)
+  - **Menu Esquerdo**:
+    - *Header* - Base para a implementação dos dados do usuário Logado (Login não foi desenvolvido, visto que não fazia parte do escopo do projeto)
       - Avatar para foto do usuário
       - Label para descrição do Nome do usuário
       - SubLabel para outras informações do usuário
-    - Lista de Rotas
+    - *Lista de Rotas*
       - Link para página Home - `/`
       - Link para página Categorias - `/categorias`
       - Link para página Produtos - `/produtos`
+
+## Páginas:
 
 - **Home - `/`**
   - Não implementada inteiramente, visto que não fazia parte do escopo inicial do projeto.
