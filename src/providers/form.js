@@ -55,7 +55,7 @@ export default {
         } else {
           await this.service.post(this.editable)
         }
-        this.$router.push('/categorias')
+        this.$emit('saved')
       } catch (error) {
         this.$notify.error({
           title: 'Não foi possível Salvar os dados!',
