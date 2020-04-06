@@ -34,6 +34,12 @@
             counter
           />
 
+          <select-categoria
+            v-model="editable.id_categoria_produto"
+            :loading="loading"
+            :readonly="loading"
+          />
+
           <q-input
             v-model="editable.valor_produto"
             label="Valor"
@@ -75,6 +81,8 @@
 import produtoService from '../../services/produto'
 
 import SubmitForm from '../../components/SubmitForm'
+import SelectCategoria from '../../components/SelectCategoria'
+
 import FormProvider from '../../providers/form'
 
 export default {
@@ -82,7 +90,8 @@ export default {
 
   components: {
     SubmitForm,
-    FormProvider
+    FormProvider,
+    SelectCategoria
   },
 
   data() {
