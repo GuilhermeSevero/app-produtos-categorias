@@ -48,7 +48,7 @@ export default {
     },
 
     async insertOrUpdate() {
-      this.loading = true
+      this.$q.loading.show()
       try {
         if (this.id) {
           await this.service.patch(this.id, this.editable)
@@ -68,7 +68,7 @@ export default {
           error
         })
       } finally {
-        this.loading = false
+        this.$q.loading.hide()
       }
     }
   },

@@ -35,11 +35,9 @@ export default {
     },
 
     async delete(id) {
-      this.loading = true
+      this.$q.loading.show()
       try {
         await this.service.delete(id)
-
-        this.$set(this, 'data', this.data.filter(el => el[this.rowKey] !== id))
 
         this.$notify.success({
           message: 'Registro apagado com sucesso!',
@@ -52,7 +50,8 @@ export default {
           error
         })
       } finally {
-        this.loading = false
+        this.$q.loading.hide()
+        this.load()
       }
     }
   },
