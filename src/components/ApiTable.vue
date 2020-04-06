@@ -1,6 +1,6 @@
 <template>
   <provider
-    ref="tableProvider"
+    ref="listaProvider"
     :service="service"
     :params="params"
   >
@@ -59,7 +59,7 @@
 </template>
 
 <script>
-import provider from '../providers/table'
+import provider from '../providers/lista'
 
 export default {
   name: 'ApiTable',
@@ -125,7 +125,7 @@ export default {
   methods: {
     refresh() {
       if (this.service) {
-        this.$refs.tableProvider.load()
+        this.$refs.listaProvider.load()
       }
     },
 
@@ -147,7 +147,7 @@ export default {
           cancel: true,
           persistent: true
         }).onOk(() => {
-          this.$refs.tableProvider.delete(this.mySelected[0][this.rowKey])
+          this.$refs.listaProvider.delete(this.mySelected[0][this.rowKey])
         })
       }
     },

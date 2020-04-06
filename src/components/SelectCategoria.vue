@@ -1,5 +1,5 @@
 <template>
-  <table-provider
+  <lista-provider
     ref="provider"
     :service="service"
   >
@@ -18,18 +18,18 @@
         map-options
       />
     </template>
-  </table-provider>
+  </lista-provider>
 </template>
 
 <script>
-import TableProvider from '../providers/table'
+import ListaProvider from '../providers/lista'
 
 import categoriaService from '../services/categoria'
 
 export default {
   name: 'SelectCategoria',
 
-  components: { TableProvider },
+  components: { ListaProvider },
 
   props: {
     value: {
