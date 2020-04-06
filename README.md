@@ -60,6 +60,8 @@ $ npm run build
       - Link para página Categorias - `/categorias`
       - Link para página Produtos - `/produtos`
 
+---
+
 ## Páginas:
 
 - **Home - `/`**
