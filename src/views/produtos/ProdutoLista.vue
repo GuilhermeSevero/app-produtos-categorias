@@ -1,16 +1,13 @@
 <template>
-  <div>
-    <api-table
-      ref="tbProdutos"
-      title="Produtos"
-      row-key="id_produto"
-      :service="service"
-      :params="filtros"
-      :columns="columns"
-      selection="single"
-      :selected.sync="selected"
-    />
-  </div>
+  <api-table
+    ref="tbProdutos"
+    title="Produtos"
+    row-key="id_produto"
+    :service="service"
+    :params="filtros"
+    :columns="columns"
+    selection="single"
+  />
 </template>
 
 <script>
@@ -29,8 +26,6 @@ export default {
 
   data() {
     return {
-      selected: [],
-
       filtros: { expand: true },
 
       columns: [
@@ -38,7 +33,6 @@ export default {
           name: 'id_produto',
           required: true,
           label: 'Código',
-          align: 'right',
           field: 'id_produto',
           sortable: true
         },
@@ -47,7 +41,6 @@ export default {
           name: 'nome_produto',
           required: true,
           label: 'Descrição',
-          align: 'left',
           field: 'nome_produto',
           sortable: true
         },
@@ -56,7 +49,6 @@ export default {
           name: 'categoria',
           required: true,
           label: 'Categoria',
-          align: 'left',
           field: 'categoria',
           format: (value) => value.nome_categoria,
           sortable: true
@@ -66,7 +58,6 @@ export default {
           name: 'valor_produto',
           required: true,
           label: 'Valor',
-          align: 'right',
           field: 'valor_produto',
           format: (value) => `R$ ${value.toFixed(2)}`
         },
@@ -75,7 +66,6 @@ export default {
           name: 'data_cadastro',
           required: true,
           label: 'Data Cadastro',
-          align: 'center',
           field: 'data_cadastro',
           format: (value) => date.formatDate(value, 'DD-MM-YYYY HH:mm:ss'),
           sortable: true
