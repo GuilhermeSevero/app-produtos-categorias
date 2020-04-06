@@ -65,15 +65,15 @@ export default {
       } finally {
         this.loading = false
       }
-    },
-
-    render() {
-      const slot = this.$scopedSlots.default({
-        loading: this.loading,
-        editable: this.editable
-      })
-
-      return Array.isArray(slot) ? slot[0] : slot
     }
+  },
+
+  render() {
+    const slot = this.$scopedSlots.default({
+      loading: this.loading,
+      editable: this.editable
+    })
+
+    return Array.isArray(slot) ? slot[0] : slot
   }
 }
