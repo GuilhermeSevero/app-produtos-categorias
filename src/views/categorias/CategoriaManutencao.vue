@@ -4,6 +4,7 @@
       ref="formProvider"
       :service="service"
       :id="idCategoria"
+      @saved="$_redirect"
     >
       <template v-slot="{ editable, loading }">
         <submit-form
@@ -54,10 +55,6 @@ export default {
 
   data() {
     return {
-      categoria: {
-        id_categoria_produto_planejamento: '',
-        nome_categoria: ''
-      }
     }
   },
 
@@ -78,6 +75,9 @@ export default {
   },
 
   methods: {
+    $_redirect() {
+      this.$router.push('/categorias')
+    }
   }
 }
 </script>
