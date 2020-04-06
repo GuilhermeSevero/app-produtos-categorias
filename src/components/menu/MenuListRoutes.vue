@@ -2,19 +2,19 @@
   <q-list pading>
     <menu-item-route
       label="Home"
-      to="home"
+      to="/home"
       icon="person_pin"
     />
 
     <menu-item-route
       label="Categorias"
-      to="categorias"
+      to="/categorias"
       icon="person_pin"
     />
 
     <menu-item-route
       label="Produtos"
-      to="produtos"
+      to="/produtos"
       icon="person_pin"
     />
   </q-list>
