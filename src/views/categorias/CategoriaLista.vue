@@ -6,6 +6,8 @@
     :service="service"
     :columns="columns"
     selection="single"
+    @addClick="$_onAddClick"
+    @editClick="$_onEditClick"
   />
 </template>
 
@@ -53,6 +55,16 @@ export default {
 
   mounted() {
     this.$refs.tbCategorias.refresh()
+  },
+
+  methods: {
+    $_onAddClick(categoria) {
+      this.$router.push('/categorias/0')
+    },
+
+    $_onEditClick(categoria) {
+      this.$router.push(`/categorias/${categoria.id_categoria_produto_planejamento}`)
+    }
   }
 }
 </script>
